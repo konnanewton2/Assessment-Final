@@ -1,0 +1,112 @@
+#include <stdio.h>
+#include <string.h>
+
+int main () { 
+    char brutestring[50];
+    char str[50];
+    int k;
+    int x;
+    int i;
+    char ch;
+    int n;
+    
+    printf("\nPlease enter the message to encrypt or decrypt: ");
+    fgets(str, sizeof(str), stdin);
+    
+    printf("Please select one of the following: \n");
+    printf("1 - Encryption by rotation cipher. \n");
+    printf("2 - Decrytion by rotation cipher. \n");
+    printf("3 - Encryption by substitution cipher. \n");
+    printf("4 - Decryption by substitution cipher. \n");
+    printf("5 - Decryption by brute for attack (rotation). \n");
+    
+    scanf("%d", &x);
+    
+    printf("Please enter the key for encryption: \n");
+    scanf("%d", &k);
+    
+    
+    switch(x){
+        case 1: 
+            for(i = 0; str[i] != '\0'; ++i){
+		ch = str[i];
+		
+		if(ch >= 'a' && ch <= 'z'){
+			ch = ch + k;
+			
+			if(ch > 'z'){
+				ch = ch - 'z' + 'a' - 1;
+			}
+			
+			str[i] = ch;
+		}
+		else if(ch >= 'A' && ch <= 'Z'){
+			ch = ch + k;
+			
+			if(ch > 'Z'){
+				ch = ch - 'Z' + 'A' - 1;
+			}
+			
+			str[i] = ch;
+		}
+	}
+	printf("Encrypted message: %s", str);
+    
+        break;
+        case 2:
+            for(i = 0; str[i] != '\0'; ++i){
+		ch = str[i];
+		
+		if(ch >= 'a' && ch <= 'z'){
+			ch = ch - k;
+			
+			if(ch > 'z'){
+				ch = ch + 'z' -'a' - 1;
+			}
+			
+			str[i] = ch;
+		}
+		else if(ch >= 'A' && ch <= 'Z'){
+			ch = ch - k;
+			
+			if(ch > 'Z'){
+				ch = ch + 'Z' - 'A' - 1;
+			}
+			
+			str[i] = ch;
+		}
+	}
+	printf("Decrypted message: %s", str);
+        break;
+        
+        case 3:
+        break;
+        
+        case 4:
+        break;
+        
+        case 5:
+        
+        printf("\nPlease enter the message to encrypt or decrypt: \n");
+        fgets(brutestring, sizeof(brutestring), stdin);
+    
+        
+        for(k = 1; k<=25; k++) {
+        
+        for(i=0; i < strlen(brutestring); i++) {
+            
+            if(brutestring[i] >= 'a' && brutestring[i] <= 'z'){
+                brutestring[i] = ((brutestring[i] - 65 + 1) % 26) + 65;
+            
+            }
+            
+        }
+        printf("\n%d: %s", x, brutestring);
+        x = 26 - k;
+    }
+
+        return 0;
+        break;
+        
+    }
+}
